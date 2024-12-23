@@ -25,6 +25,8 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('sections')
                 ->onDelete('set null');
+
+            $table->unique('user_id');
             $table->timestamps();
         });
     }

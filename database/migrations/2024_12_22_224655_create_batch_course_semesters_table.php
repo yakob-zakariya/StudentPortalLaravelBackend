@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('batch_course_semesters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->foreignId('batch_id')->constrained('batches')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->foreignId('semester_id')->constrained('semesters')->onDelete('cascade');
 
-            $table->unique(['name', 'batch_id']);
+            $table->unique(['batch_id', 'course_id', 'semester_id']);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('batch_course_semesters');
     }
 };
