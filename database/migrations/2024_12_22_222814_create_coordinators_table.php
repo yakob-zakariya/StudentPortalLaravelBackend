@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('coordinators', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
-
-            $table->unique('user_id');
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade')->unique();
             $table->timestamps();
         });
     }

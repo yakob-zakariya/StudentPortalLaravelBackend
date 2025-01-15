@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('batch_id')->constrained('batches')->onDelete('cascade');
 
-            $table->unique(['name', 'batch_id']);
+            $table->unique(['name', 'batch_id'], 'section_batch_unique');
             $table->timestamps();
         });
     }
