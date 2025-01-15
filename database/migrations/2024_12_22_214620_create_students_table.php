@@ -17,6 +17,8 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade')->unique();
 
+
+
             $table->foreignId('batch_id')
                 ->constrained('batches')
                 ->onDelete('cascade');

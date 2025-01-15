@@ -3,30 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\Department;
 
 class DepartmentController extends Controller
 {
     public function index()
     {
+        // sleep(3);
         $departments = Department::all();
         return response()->json([
             'departments' => $departments,
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'unique:departments,name'],
-            'code' => ['required', 'unique:departments,code'],
-        ]);
+        $validated = $request->validated();
 
-        $department = Department::create([
-            'name' => $request->name,
-            'code' => $request->code,
-        ]);
+        $department = Department::create($validated);
 
         return response()->json([
             'department' => $department
@@ -35,19 +31,15 @@ class DepartmentController extends Controller
 
     public function show(Department $department)
     {
-
+        // sleep(3);
         return response()->json([
             'department' => $department,
         ]);
     }
 
-    public function update(Request $request, Department $department)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        $validated = $request->validate([
-            'name' => ['sometimes', 'string', 'unique:departments,name,' . $department->id],
-            'code' => ['sometimes', 'string', 'unique:departments,code,' . $department->id]
-        ]);
-
+        $validated = $request->validated();
         $department->update($validated);
 
         return response()->json([

@@ -13,7 +13,7 @@ class LoginController extends Controller
 
 
         $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email',],
             'password' => ['required']
         ]);
 
@@ -30,7 +30,20 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'message' => 'Invalid credentials'
+            'errors' => [
+                'email' => ['Invalid credentials']
+            ]
         ], 401);
+    }
+
+    public function logout(Request $request)
+    {
+
+        // $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => "Logged out"
+        ]);
     }
 }
