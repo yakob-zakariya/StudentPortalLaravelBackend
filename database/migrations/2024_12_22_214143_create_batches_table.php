@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('entry_year')->default(date('Y'));
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
 
-            $table->unique(['name', 'department_id']);
+            $table->unique(['name', 'department_id'], 'batch_department_unique');
             $table->timestamps();
         });
     }

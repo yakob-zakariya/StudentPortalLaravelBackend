@@ -30,7 +30,7 @@ return new class extends Migration
 
             $table->string('status')->default('Not Determined');
 
-            $table->unique(['student_id', 'semester_id']);
+            $table->unique(['student_id', 'semester_id'], 'student_semester_unique');
             $table->timestamps();
         });
     }

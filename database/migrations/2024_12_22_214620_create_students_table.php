@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')->unique();
+
+
 
             $table->foreignId('batch_id')
                 ->constrained('batches')
@@ -26,7 +28,6 @@ return new class extends Migration
                 ->constrained('sections')
                 ->onDelete('set null');
 
-            $table->unique('user_id');
             $table->timestamps();
         });
     }
