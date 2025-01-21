@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get(
-    '/',
-    function () {
-        return "hello World";
-    }
-);
+
+Route::get('/',function(){
+    return "hello World";
+        }
+           );
+
